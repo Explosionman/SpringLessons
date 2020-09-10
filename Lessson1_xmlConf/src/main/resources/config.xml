@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="bullet" class="ru.rybinskov.gb.SimpleBullet"/>
+
+    <bean id="automaticWeapon" class="ru.rybinskov.gb.AutomaticWeaponImpl">
+        <property name="bullet" ref="bullet"/>
+    </bean>
+
+    <bean id="automaticWeaponInnerBean" class="ru.rybinskov.gb.AutomaticWeaponImpl">
+        <property name="bullet">
+            <bean class="ru.rybinskov.gb.TracerBullet"/>
+        </property>
+    </bean>
+
+    <bean id="automaticWeaponConstructor" class="ru.rybinskov.gb.AutomaticWeaponImpl">
+        <constructor-arg name="bullet" ref="bullet"/>
+    </bean>
+</beans>

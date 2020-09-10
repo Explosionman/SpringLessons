@@ -6,7 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Spring" />
+        <module name="Lessson1_xmlConf" />
+        <module name="lesson1_classConf" />
+        <module name="Lesson2" />
       </profile>
     </annotationProcessing>
   </component>
