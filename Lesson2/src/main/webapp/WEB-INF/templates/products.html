@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+
+<h1>All products</h1>
+<span th:if="${products.size() == 0}">Products List is empty</span>
+<table th:if="${products.size() > 0}" class="table table-hover">
+    <tr>
+        <td>ID</td>
+        <td>Title</td>
+        <td>Price</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"/>
+        <td th:text="${product.title}"/>
+        <td th:text="${product.price}"/>
+        <td><a th:href="@{'/products/delete/' + ${product.id}}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
