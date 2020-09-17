@@ -14,7 +14,10 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(
             name = "purchases_tbl",
             joinColumns = @JoinColumn(name = "user_id"),

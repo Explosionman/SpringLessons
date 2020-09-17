@@ -17,7 +17,10 @@ public class Product {
     @Column(name = "price")
     private Long price;
 
-    @ManyToMany
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(name = "purchases_tbl",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -55,7 +58,7 @@ public class Product {
         return users;
     }
 
-    public void setCategories(List<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 }
