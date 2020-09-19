@@ -59,6 +59,7 @@ public class App {
 
         //Почему он не срабатывает?
         user2.setProducts(Arrays.asList(milk));
+        saveUserEntity(em, user2);
         Thread.sleep(1500);
         {
             System.out.println("Клиент " + user1.getName() + " купил:");
