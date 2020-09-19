@@ -12,6 +12,7 @@
         <module>Lessson1_xmlConf</module>
         <module>lesson1_classConf</module>
         <module>Lesson2</module>
+        <module>lesson3</module>
     </modules>
 
     <dependencies>
