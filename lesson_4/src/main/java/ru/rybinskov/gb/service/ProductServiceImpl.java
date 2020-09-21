@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.rybinskov.gb.domain.Product;
 import ru.rybinskov.gb.repository.DataInit;
 import ru.rybinskov.gb.repository.ProductJpaDAO;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
