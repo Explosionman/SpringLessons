@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+
+<div id="nav-menu" align="center">
+    <table>
+        <tr>
+            <td><a th:href="@{/}">Home</a></td>
+            <td></td>
+            <td><a th:href="@{/products}">Products</a></td>
+        </tr>
+    </table>
+</div>
+
+<h1>All products</h1>
+<span th:if="${products.size() == 0}">Products List is empty</span>
+<table th:if="${products.size() > 0}" class="table table-hover">
+    <tr>
+        <td><a th:href="@{/products/filterByMin}">Filter by min price</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/products/filterByMax}">Filter by max price</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/products/filterById}">Filter by ID</a></td>
+    </tr>
+
+    <tr>
+        <td>ID</td>
+        <td>Title</td>
+        <td>Price</td>
+    </tr>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"/>
+        <td th:text="${product.title}"/>
+        <td th:text="${product.price}"/>
+        <td><a th:href="@{'/products/delete/' + ${product.id}}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -14,7 +14,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{AppConfig.class};
+        return new Class[]{MvcConfig.class};
     }
 
     @Override
@@ -30,5 +30,4 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
         HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
         return new Filter[]{russianCharsFilter, hiddenHttpMethodFilter};
     }
-
 }
