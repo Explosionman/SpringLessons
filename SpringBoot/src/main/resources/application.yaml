@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  mvc:
+    static-path-pattern: /statico/**
+  jpa:
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=lesson5
+    username: postgres
+    password: n7g2phk2
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, beans, mappings

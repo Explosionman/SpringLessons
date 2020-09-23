@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.rybinskov</groupId>
+    <groupId>ru.rybinskov.gb</groupId>
     <artifactId>Spring</artifactId>
     <packaging>pom</packaging>
     <version>1</version>
@@ -13,9 +13,7 @@
         <module>lesson1_classConf</module>
         <module>Lesson2</module>
         <module>lesson3</module>
-        <module>lesson5</module>
         <module>lesson_4</module>
-        <module>lesson6</module>
     </modules>
 
     <dependencies>
