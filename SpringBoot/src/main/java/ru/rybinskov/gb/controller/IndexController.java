@@ -10,7 +10,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("msg", "Скоро открытие!!! " +
-                "А пока, взгляните на первый ассортимент: ");
+                "А пока, взгляните на первый ассортимент.");
         return "index";
     }
 }
