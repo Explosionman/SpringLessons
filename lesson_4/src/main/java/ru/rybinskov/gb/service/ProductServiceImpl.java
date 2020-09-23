@@ -6,10 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.rybinskov.gb.domain.Product;
 import ru.rybinskov.gb.repository.DataInit;
 import ru.rybinskov.gb.repository.ProductJpaDAO;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl {
@@ -62,5 +62,14 @@ public class ProductServiceImpl {
         Comparator<Product> productComparator = Comparator.comparing(Product::getPrice);
         Collections.sort(products, productComparator.reversed());
         return products;
+    }
+
+    @Transactional
+    public List<Product> getPriceByRange(Long start, Long end){
+        List<Product> products = productJpaDAO.findAll();
+        return products.stream()
+                .filter(product-> product.getPrice() >= start && product.getPrice() <= end)
+                .sorted(Comparator.comparingDouble(Product::getPrice))
+                .collect(Collectors.toList());
     }
 }

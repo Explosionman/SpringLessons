@@ -16,33 +16,46 @@
     </table>
 </div>
 
+
 <h1>All products</h1>
 <span th:if="${products.size() == 0}">Products List is empty</span>
-<table th:if="${products.size() > 0}" class="table table-hover">
-    <tr>
-        <td><a th:href="@{/products/filterByMin}">Filter by min price</a></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/products/filterByMax}">Filter by max price</a></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/products/filterById}">Filter by ID</a></td>
-    </tr>
+<table>
+    <table th:if="${products.size() > 0}" class="table table-hover">
+        <tr>
+            <td><a th:href="@{/products/filterByMin}">Filter by min price</a></td>
+        </tr>
+        <tr>
+            <td><a th:href="@{/products/filterByMax}">Filter by max price</a></td>
+        </tr>
+        <tr>
+            <td><a th:href="@{/products/filterById}">Filter by ID</a></td>
+        </tr>
 
-    <tr>
-        <td>ID</td>
-        <td>Title</td>
-        <td>Price</td>
-    </tr>
-    <tbody>
-    <tr th:each="product : ${products}">
-        <td th:text="${product.id}"/>
-        <td th:text="${product.title}"/>
-        <td th:text="${product.price}"/>
-        <td><a th:href="@{'/products/delete/' + ${product.id}}">Delete</a></td>
-    </tr>
-    </tbody>
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Price</td>
+        </tr>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"/>
+            <td th:text="${product.title}"/>
+            <td th:text="${product.price}"/>
+            <td><a th:href="@{'/products/delete/' + ${product.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <form th:action="@{/products}"  method="get">
+            <p>Find products by price:<br>
+                start price: <input type="number" name="startPrice" value=""><br>
+                end price: <input type="number" name="endPrice" value=""><br>
+                <button type="submit">find</button>
+            </p>
+        </form>
+    </table>
 </table>
+
 
 </body>
 </html>
