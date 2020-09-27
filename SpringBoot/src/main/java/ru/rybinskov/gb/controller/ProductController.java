@@ -9,7 +9,7 @@ import ru.rybinskov.gb.service.ProductServiceImpl;
 import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping("/products")
 public class ProductController {
 
@@ -19,11 +19,10 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String list(Model model) {
-        List<Product> products = productService.getAll();
-        model.addAttribute("products", products);
-        return "products";
+    //переделан под json
+    @GetMapping
+    public List<Product> list() {
+        return productService.getAll();
     }
 
     @GetMapping("/delete/{id}")
