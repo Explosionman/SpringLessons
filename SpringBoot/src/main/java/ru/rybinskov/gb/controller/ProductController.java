@@ -8,8 +8,6 @@ import ru.rybinskov.gb.service.ProductServiceImpl;
 
 import java.util.List;
 
-
-@RestController
 @RequestMapping("/products")
 public class ProductController {
 
@@ -19,10 +17,11 @@ public class ProductController {
         this.productService = productService;
     }
 
-    //переделан под json
-    @GetMapping
-    public List<Product> list() {
-        return productService.getAll();
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(Model model) {
+        List<Product> products = productService.getAll();
+        model.addAttribute("products", products);
+        return "products";
     }
 
     @GetMapping("/delete/{id}")
@@ -55,7 +54,7 @@ public class ProductController {
     @GetMapping(params = {"startPrice", "endPrice"})
     public String productsByPrice(Model model,
                                   @RequestParam(name = "startPrice") Long startPrice,
-                                  @RequestParam(name = "endPrice") Long endPrice){
+                                  @RequestParam(name = "endPrice") Long endPrice) {
         List<Product> products = productService.getPriceByRange(startPrice, endPrice);
         model.addAttribute("products", products);
         return "products";
