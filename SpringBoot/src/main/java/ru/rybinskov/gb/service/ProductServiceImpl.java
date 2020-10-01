@@ -67,11 +67,16 @@ public class ProductServiceImpl {
     }
 
     @Transactional
-    public List<Product> getPriceByRange(Long start, Long end){
+    public List<Product> getPriceByRange(Long start, Long end) {
         List<Product> products = productJpaDAO.findAll();
         return products.stream()
-                .filter(product-> product.getPrice() >= start && product.getPrice() <= end)
+                .filter(product -> product.getPrice() >= start && product.getPrice() <= end)
                 .sorted(Comparator.comparingDouble(Product::getPrice))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void update(Product product) {
+        productJpaDAO.save(product);
     }
 }
