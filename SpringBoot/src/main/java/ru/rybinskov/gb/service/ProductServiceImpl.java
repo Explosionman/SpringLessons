@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rybinskov.gb.domain.Product;
-import ru.rybinskov.gb.repository.DataInit;
+import ru.rybinskov.gb.bootstrap.DataInit;
 import ru.rybinskov.gb.repository.ProductJpaDAO;
 
 
@@ -21,7 +21,6 @@ public class ProductServiceImpl {
     @Autowired
     public void setProductJpaDAO(ProductJpaDAO productJpaDAO) {
         this.productJpaDAO = productJpaDAO;
-        DataInit.init(productJpaDAO);
     }
 
 
@@ -67,11 +66,16 @@ public class ProductServiceImpl {
     }
 
     @Transactional
-    public List<Product> getPriceByRange(Long start, Long end){
+    public List<Product> getPriceByRange(Long start, Long end) {
         List<Product> products = productJpaDAO.findAll();
         return products.stream()
-                .filter(product-> product.getPrice() >= start && product.getPrice() <= end)
+                .filter(product -> product.getPrice() >= start && product.getPrice() <= end)
                 .sorted(Comparator.comparingDouble(Product::getPrice))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void update(Product product) {
+        productJpaDAO.save(product);
     }
 }

@@ -8,8 +8,7 @@ import ru.rybinskov.gb.service.ProductServiceImpl;
 
 import java.util.List;
 
-
-@RestController
+@Controller
 @RequestMapping("/products")
 public class ProductController {
 
@@ -19,10 +18,11 @@ public class ProductController {
         this.productService = productService;
     }
 
-    //переделан под json
-    @GetMapping
-    public List<Product> list() {
-        return productService.getAll();
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(Model model) {
+        List<Product> products = productService.getAll();
+        model.addAttribute("products", products);
+        return "products";
     }
 
     @GetMapping("/delete/{id}")
@@ -55,10 +55,36 @@ public class ProductController {
     @GetMapping(params = {"startPrice", "endPrice"})
     public String productsByPrice(Model model,
                                   @RequestParam(name = "startPrice") Long startPrice,
-                                  @RequestParam(name = "endPrice") Long endPrice){
+                                  @RequestParam(name = "endPrice") Long endPrice) {
         List<Product> products = productService.getPriceByRange(startPrice, endPrice);
         model.addAttribute("products", products);
         return "products";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String getFormEditProduct(@PathVariable(name = "id") Long id, Model model) {
+        model.addAttribute("product", productService.findById(id));
+        return "edit-product";
+    }
+
+    @PostMapping("/edit")
+    public String editProduct(@ModelAttribute Product product) {
+        System.out.println(product);
+        productService.save(product);
+        return "redirect:/products";
+    }
+
+    @GetMapping("/new")
+    public String getFormNewProduct(Model model) {
+        model.addAttribute("product", new Product());
+        return "new-product";
+    }
+
+
+    @PostMapping("/new")
+    public String addNewProduct(Product product) {
+        productService.save(product);
+        return "redirect:/products/";
     }
 
 }

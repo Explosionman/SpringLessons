@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
@@ -15,6 +15,8 @@
             <td><a th:href="@{/}">Home</a></td>
             <td></td>
             <td><a th:href="@{/products}">Products</a></td>
+            <td></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/users}">Users</a></td>
         </tr>
     </table>
 </div>
@@ -26,7 +28,7 @@
     <tr>
         <td>
             <form th:action="@{/products}" method="get">
-                <h4 align="center">Find products by price:</h4>
+                <h5 align="center">Find products by price:</h5>
                 <br>
                 <table>
                     <tr>
@@ -46,9 +48,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-
-                        </td>
+                        <td></td>
                         <td align="right">
                             <button class="btn btn-success" type="submit">find</button>
                         </td>
@@ -64,14 +64,14 @@
 <br>
 <table width="20%" align="center" th:if="${products.size() > 0}">
     <tr>
+        <td sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')"><a class="btn btn-success" th:href="@{/products/new}">Add Product</a></td>
         <td><a class="btn btn-info" th:href="@{/products/filterByMin}">Filter by min price</a></td>
-
         <td><a class="btn btn-info" th:href="@{/products/filterByMax}">Filter by max price</a></td>
-
         <td><a class="btn btn-info" th:href="@{/products/filterById}">Filter by ID</a></td>
     </tr>
 </table>
 <br>
+
 <table width="30%" align="center">
     <thead class="thead-dark">
     <tr>
@@ -84,9 +84,11 @@
         <td th:text="${product.id}"/>
         <td th:text="${product.title}"/>
         <td th:text="${product.price}"/>
-        <td><a class="btn btn-danger btn-sm" th:href="@{'/products/delete/' + ${product.id}}">Delete</a></td>
+        <td sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')"><a class="btn btn-danger btn-sm" th:href="@{'/products/delete/' + ${product.id}}">Delete</a></td>
+        <td sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')"><a class="btn btn-info btn-sm" th:href="@{'/products/edit/' + ${product.id}}">Edit</a></td>
     </tr>
-</table>
+</table><br>
+
 <hr>
 <br>
 <h6 align="center">...</h6>
