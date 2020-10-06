@@ -23,18 +23,21 @@
 <h1 align="center">Edit product</h1>
 <br>
 
-<form th:action="@{/products/new}" th:object="${product}" method="post">
+<form th:action="@{/products/edit}" th:object="${product}" method="post">
     <table border="1">
         <tr>
+            <td hidden><input type="number" name="id" th:field="*{id}"/></td>
+        </tr>
+        <tr>
             <td>Title</td>
-            <td th:text="${product.title}" contenteditable="true"><input type="text" th:field="*{title}"/></td>
+            <td><input type="text" name="title" th:field="*{title}"/></td>
         </tr>
         <tr>
             <td>Price</td>
-            <td th:number="${product.price}" contenteditable="true"><input type="number" th:field="*{price}"/></td>
+            <td><input type="number" name="price" th:field="*{price}"/></td>
         </tr>
     </table>
-    <button type="submit">Save</button>
+    <button type="submit">save changes</button>
 </form>
 <hr>
 <br>
